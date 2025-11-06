@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster"
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingActionButtons } from '@/components/shared/FloatingActionButtons';
-import { GoogleTranslate } from '@/components/shared/GoogleTranslate';
 import { ZoomButtons } from '@/components/shared/ZoomButtons';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Symbolic Care Hub',
@@ -26,7 +26,21 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <GoogleTranslate />
+        <Script
+          id="google-translate-script"
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            function googleTranslateElementInit() {
+              new window.google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+              }, 'google_translate_element');
+            }
+          `}
+        </Script>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-grow">{children}</main>
