@@ -16,41 +16,40 @@ type ServicePageProps = {
 };
 
 export async function generateStaticParams() {
+  // Exclude slugs that have specific pages/redirects to avoid conflicts.
+  const excludedSlugs = [
+    'domiciliary-care',
+    'supported-living-services',
+    'respite-care',
+    'cqc-consultancy',
+    'specialist-services',
+    'other-services'
+  ];
+
   return services
-    .filter(service => 
-      service.slug !== 'domiciliary-care' && 
-      service.slug !== 'supported-living-services' &&
-      service.slug !== 'respite-care' &&
-      service.slug !== 'cqc-consultancy' &&
-      service.slug !== 'specialist-services' &&
-      service.slug !== 'other-services'
-    )
+    .filter(service => !excludedSlugs.includes(service.slug))
     .map((service) => ({
       slug: service.slug,
     }));
 }
 
 export default function ServicePage({ params }: ServicePageProps) {
+  // These redirects handle old or direct links to pages that now have dedicated routes.
   if (params.slug === 'domiciliary-care') {
     permanentRedirect('/services/domiciliary-care');
   }
-
   if (params.slug === 'supported-living-services') {
     permanentRedirect('/services/supported-living-services');
   }
-  
   if (params.slug === 'respite-care') {
     permanentRedirect('/services/respite-care');
   }
-
   if (params.slug === 'cqc-consultancy') {
     permanentRedirect('/services/cqc-consultancy');
   }
-
   if (params.slug === 'specialist-services') {
     permanentRedirect('/services/specialist-services');
   }
-  
   if (params.slug === 'other-services') {
     permanentRedirect('/services/other-services');
   }
