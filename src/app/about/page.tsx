@@ -233,11 +233,12 @@ export default function AboutPage() {
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border">
                     <Link href="https://www.google.com/maps/search/?api=1&query=51.5072,-0.1276" target="_blank" rel="noopener noreferrer">
                         <Image
-                            src="https://maps.googleapis.com/maps/api/staticmap?center=51.5072,-0.1276&zoom=14&size=800x450&markers=color:blue%7Clabel:S%7C51.5072,-0.1276&key="
+                            src="https://picsum.photos/seed/map/1600/900"
                             alt="Map of London office"
                             width={1600}
                             height={900}
                             className="w-full h-full object-cover cursor-pointer"
+                            data-ai-hint="map london"
                         />
                     </Link>
                 </div>
