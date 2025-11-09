@@ -1,0 +1,79 @@
+/**
+ * @fileoverview Firestore Security Rules for Symbolic Care Hub.
+ *
+ * Core Philosophy:
+ * This ruleset provides basic security for two collections: 'services' and 'contactFormSubmissions'.
+ * 'services' are publicly readable, but only authorized users (e.g., admins - not yet defined in detail) can create, update, or delete them.
+ * 'contactFormSubmissions' are only accessible to authorized users (e.g., admins).
+ *
+ * Data Structure:
+ * - /services/{serviceId}: Stores service information.
+ * - /contactFormSubmissions/{contactFormSubmissionId}: Stores contact form submissions.
+ *
+ * Key Security Decisions:
+ * - Public read access to the 'services' collection to allow anyone to view service details.
+ * - Strict access control for 'contactFormSubmissions', requiring authentication (admin role to be defined).
+ * - No user listing is allowed in this basic version, but this can be modified according to the app requirements.
+ *
+ * Denormalization for Authorization:
+ * In this basic version, there is no requirement to denormalize data for authorization. If granular access control is required (e.g., different roles for service editing),
+ * it would be necessary to add a 'members' map on the 'services' documents. For example:
+ *   /services/{serviceId}: { members: { 'user_abc': 'editor', 'user_xyz': 'viewer' } }
+ * Then the rules could check `resource.data.members[request.auth.uid] == 'editor'` to allow edits.
+ *
+ * Structural Segregation:
+ * The separation of services and contact form submissions into distinct collections simplifies the security rules and matches the different access patterns.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Allows public read access to service information, but restricts create, update, and delete operations to authorized users.
+     * @path /services/{serviceId}
+     * @allow (get, list): if true
+     * @allow (create, update, delete): if isAdmin() // Example: Replace with your actual admin check
+     * @deny (create, update, delete): if !isAdmin() // Example: Replace with your actual admin check
+     * @principle Allows public reads, restricts writes to admins.
+     */
+    match /services/{serviceId} {
+      allow get, list: if true;
+      allow create: if isAdmin();
+      allow update: if isExistingAdmin();
+      allow delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Restricts access to contact form submissions to authorized users only.
+     * @path /contactFormSubmissions/{contactFormSubmissionId}
+     * @allow (get, list): if isAdmin() // Example: Replace with your actual admin check
+     * @allow (create): if true;
+     * @allow (update, delete): if isAdmin() // Example: Replace with your actual admin check
+     * @deny (get, list, update, delete): if !isAdmin() // Example: Replace with your actual admin check
+     * @principle Enforces admin-only access for sensitive contact form data.
+     */
+    match /contactFormSubmissions/{contactFormSubmissionId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if true;
+      allow update: if isExistingAdmin();
+      allow delete: if isExistingAdmin();
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Placeholder for admin check - replace with your actual logic
+    function isAdmin() {
+      return isSignedIn(); // In real implementation, check for admin role in a separate document or custom claim.
+    }
+
+      // Placeholder for admin check - replace with your actual logic
+    function isExistingAdmin() {
+      return isSignedIn() && resource != null; // In real implementation, check for admin role in a separate document or custom claim.
+    }
+
+  }
+}
