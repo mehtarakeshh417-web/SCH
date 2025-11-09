@@ -3,7 +3,6 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'export',
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -16,7 +15,6 @@ const nextConfig: NextConfig = {
     ],
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -43,7 +41,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https' as const,
+        protocol: 'https',
         hostname: 'maps.googleapis.com',
         port: '',
         pathname: '/**',
@@ -59,4 +57,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-    
