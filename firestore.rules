@@ -1,79 +1,65 @@
 /**
- * @fileoverview Firestore Security Rules for Symbolic Care Hub.
+ * @fileOverview Firestore Security Rules for Symbolic Care Hub.
  *
  * Core Philosophy:
- * This ruleset provides basic security for two collections: 'services' and 'contactFormSubmissions'.
- * 'services' are publicly readable, but only authorized users (e.g., admins - not yet defined in detail) can create, update, or delete them.
- * 'contactFormSubmissions' are only accessible to authorized users (e.g., admins).
+ * This ruleset provides public read access to service information and restricts write access to authenticated users for both services and contact form submissions. This approach allows for easy browsing of services while preventing unauthorized modifications.
  *
  * Data Structure:
- * - /services/{serviceId}: Stores service information.
- * - /contactFormSubmissions/{contactFormSubmissionId}: Stores contact form submissions.
+ * The data is organized into two top-level collections:
+ * - /services/{serviceId}: Stores information about available services. Publicly readable.
+ * - /contact_form_submissions/{submissionId}: Stores contact form submissions. Only writable by authenticated users.
  *
  * Key Security Decisions:
- * - Public read access to the 'services' collection to allow anyone to view service details.
- * - Strict access control for 'contactFormSubmissions', requiring authentication (admin role to be defined).
- * - No user listing is allowed in this basic version, but this can be modified according to the app requirements.
- *
- * Denormalization for Authorization:
- * In this basic version, there is no requirement to denormalize data for authorization. If granular access control is required (e.g., different roles for service editing),
- * it would be necessary to add a 'members' map on the 'services' documents. For example:
- *   /services/{serviceId}: { members: { 'user_abc': 'editor', 'user_xyz': 'viewer' } }
- * Then the rules could check `resource.data.members[request.auth.uid] == 'editor'` to allow edits.
- *
- * Structural Segregation:
- * The separation of services and contact form submissions into distinct collections simplifies the security rules and matches the different access patterns.
+ * - Public read access for services to enable easy browsing.
+ * - Authenticated-user-only write access for services and contact form submissions.
+ * - No user listing is allowed.
+ * - The design avoids complex authorization schemes and `get()` calls for simplicity and performance.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows public read access to service information, but restricts create, update, and delete operations to authorized users.
+     * @description Allows anyone to read service information and only authenticated users to create, update, or delete services.
      * @path /services/{serviceId}
-     * @allow (get, list): if true
-     * @allow (create, update, delete): if isAdmin() // Example: Replace with your actual admin check
-     * @deny (create, update, delete): if !isAdmin() // Example: Replace with your actual admin check
-     * @principle Allows public reads, restricts writes to admins.
+     * @allow get, list: if true;
+     * @allow create: if isSignedIn();
+     * @allow update: if isSignedIn() && resource != null;
+     * @allow delete: if isSignedIn() && resource != null;
+     * @deny get: if false;
+     * @deny list: if false;
+     * @deny create: if false;
+     * @deny update: if false;
+     * @deny delete: if false;
+     * @principle Enables public access for reading and authenticated access for creating, updating and deleting services.
      */
     match /services/{serviceId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update: if isExistingAdmin();
-      allow delete: if isExistingAdmin();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && resource != null;
+      allow delete: if isSignedIn() && resource != null;
     }
 
     /**
-     * @description Restricts access to contact form submissions to authorized users only.
-     * @path /contactFormSubmissions/{contactFormSubmissionId}
-     * @allow (get, list): if isAdmin() // Example: Replace with your actual admin check
-     * @allow (create): if true;
-     * @allow (update, delete): if isAdmin() // Example: Replace with your actual admin check
-     * @deny (get, list, update, delete): if !isAdmin() // Example: Replace with your actual admin check
-     * @principle Enforces admin-only access for sensitive contact form data.
+     * @description Allows authenticated users to create contact form submissions.
+     * @path /contact_form_submissions/{submissionId}
+     * @allow create: if isSignedIn();
+     * @allow get, list, update, delete: if false;
+     * @deny create: if false;
+     * @deny get: if true;
+     * @deny list: if true;
+     * @deny update: if true;
+     * @deny delete: if true;
+     * @principle Restricts creation of contact form submissions to authenticated users.
      */
-    match /contactFormSubmissions/{contactFormSubmissionId} {
-      allow get: if isAdmin();
-      allow list: if isAdmin();
-      allow create: if true;
-      allow update: if isExistingAdmin();
-      allow delete: if isExistingAdmin();
+    match /contact_form_submissions/{submissionId} {
+      allow create: if isSignedIn();
+      allow get, list, update, delete: if false;
     }
 
-    // Helper functions
+    // Helper function to check if the user is signed in.
     function isSignedIn() {
       return request.auth != null;
     }
-
-    // Placeholder for admin check - replace with your actual logic
-    function isAdmin() {
-      return isSignedIn(); // In real implementation, check for admin role in a separate document or custom claim.
-    }
-
-      // Placeholder for admin check - replace with your actual logic
-    function isExistingAdmin() {
-      return isSignedIn() && resource != null; // In real implementation, check for admin role in a separate document or custom claim.
-    }
-
   }
 }

@@ -4,7 +4,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Service",
       "type": "object",
-      "description": "Represents a service offered by Symbolic Care Hub.",
+      "description": "Represents a service offered by the adult health care center.",
       "properties": {
         "id": {
           "type": "string",
@@ -17,6 +17,11 @@
         "description": {
           "type": "string",
           "description": "Detailed description of the service."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the image representing the service.",
+          "format": "uri"
         }
       },
       "required": [
@@ -46,11 +51,11 @@
         },
         "message": {
           "type": "string",
-          "description": "The message submitted through the contact form."
+          "description": "The message submitted through the form."
         },
         "submissionDate": {
           "type": "string",
-          "description": "The date and time the contact form was submitted.",
+          "description": "Date and time of the form submission.",
           "format": "date-time"
         }
       },
@@ -78,7 +83,7 @@
           "schema": {
             "$ref": "#/backend/entities/Service"
           },
-          "description": "Stores information about services offered by Symbolic Care Hub.",
+          "description": "Stores service details offered by Symbolic Care.",
           "params": [
             {
               "name": "serviceId",
@@ -88,22 +93,22 @@
         }
       },
       {
-        "path": "/contactFormSubmissions/{contactFormSubmissionId}",
+        "path": "/contact_form_submissions/{submissionId}",
         "definition": {
           "entityName": "ContactFormSubmission",
           "schema": {
             "$ref": "#/backend/entities/ContactFormSubmission"
           },
-          "description": "Stores contact form submissions.  Admin user would be able to view/edit all data.",
+          "description": "Stores contact form submissions from the website.",
           "params": [
             {
-              "name": "contactFormSubmissionId",
+              "name": "submissionId",
               "description": "Unique identifier for the contact form submission."
             }
           ]
         }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to support the Symbolic Care Hub website, focusing on service information and contact form submissions. Authorization Independence is achieved inherently as there's no cross-document authorization requirements, and each document stands alone. The structure segregates service information and contact form submissions into separate collections, each having distinct security needs and simplifying security rules. No `list` operations are protected in this basic version, but that would easily be added if the app required it. If admin users were created, their roles would live in collections such as `/roles_admin/{uid}`."
+    "reasoning": "The Firestore data structure is designed to support the Symbolic Care Hub application's core features, including displaying services and handling contact form submissions.  The structure emphasizes simplicity, security, and scalability.\n\nAuthorization Independence is achieved by avoiding any `get()` calls in the security rules. Since there's no user-specific data or collaborative features (like user accounts managing the services), authorization is straightforward. The `services` and `contact_form_submissions` collections have no direct access control needs beyond basic write permissions based on authentication, which could be expanded later as needed.\n\nQAPs (Rules Are Not Filters) are supported by ensuring that listing services and contact form submissions does not rely on filtering within the rules themselves. Data is segregated into separate collections (`services`, `contact_form_submissions`), each with homogeneous security postures. Since there is no role based access control, list operation will depend on read after authentication checks\n\nThe structure is also designed for clarity and predictability, using explicit naming conventions and avoiding dynamic keys. This facilitates easier debugging and maintenance."
   }
 }
