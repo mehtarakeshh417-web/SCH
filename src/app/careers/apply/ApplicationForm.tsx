@@ -25,7 +25,12 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   email: z.string().email("Please enter a valid email address."),
   phone: z.string().min(10, "Please enter a valid phone number."),
-  cv: z.instanceof(FileList).refine((files) => files?.length === 1, "CV is required."),
+  cv: z
+    .any()
+    .refine(
+      (files) => typeof window === "undefined" || (files && files.length === 1),
+      "CV is required."
+    ),
   rightToWork: z.enum(["Yes", "No"], { required_error: "This field is required." }),
   dbsCheck: z.enum(["Yes", "No"], { required_error: "This field is required." }),
   drivingLicense: z.enum(["Yes", "No"], { required_error: "This field is required." }),
