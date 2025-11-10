@@ -53,23 +53,21 @@ export default function SpecialistServicesPage() {
                     const slug = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
                     
                     return (
-                        <Link key={category.category} href={`/services/specialist/${slug}`} className="group">
-                           <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 border-2 border-transparent hover:border-primary hover:shadow-2xl">
-                                <CardHeader className="flex flex-col items-center text-center p-6">
-                                    {LucideIcon && (
-                                    <div className="bg-primary/10 text-primary p-4 rounded-full mb-4 transition-transform duration-300 group-hover:scale-110">
-                                        <LucideIcon className="h-10 w-10" />
-                                    </div>
-                                    )}
-                                    <CardTitle className="font-headline text-2xl">{category.category}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex-grow text-center px-6 pb-6">
-                                    <p className="text-muted-foreground">
-                                        {category.links[0]?.description || `Find resources and support for ${category.category.toLowerCase()}.`}
-                                    </p>
-                                </CardContent>
-                            </Card>
-                        </Link>
+                        <Card key={category.category} className="flex flex-col h-full overflow-hidden transition-all duration-300 border-2 border-transparent">
+                            <CardHeader className="flex flex-col items-center text-center p-6">
+                                {LucideIcon && (
+                                <div className="bg-primary/10 text-primary p-4 rounded-full mb-4 transition-transform duration-300">
+                                    <LucideIcon className="h-10 w-10" />
+                                </div>
+                                )}
+                                <CardTitle className="font-headline text-2xl">{category.category}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex-grow text-center px-6 pb-6">
+                                <p className="text-muted-foreground">
+                                    {category.links[0]?.description || `Find resources and support for ${category.category.toLowerCase()}.`}
+                                </p>
+                            </CardContent>
+                        </Card>
                     );
                 })}
             </div>
