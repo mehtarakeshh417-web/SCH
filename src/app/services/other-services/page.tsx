@@ -95,6 +95,14 @@ export default function OtherServicesPage() {
                     })}
                 </div>
             </div>
+
+            <div className="flex justify-center mt-12">
+                <a href="/contact">
+                    <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold shadow hover:bg-primary/90 transition-colors">
+                        Enquire now
+                    </button>
+                </a>
+            </div>
         </div>
     );
 }
