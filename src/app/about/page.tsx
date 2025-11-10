@@ -233,7 +233,7 @@ export default function AboutPage() {
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border">
                     <Link href="https://www.google.com/maps/search/?api=1&query=51.75339,0.46237" target="_blank" rel="noopener noreferrer">
                         <Image
-                            src="https://picsum.photos/seed/map/1600/900"
+                            src="https://res.cloudinary.com/dncupgwgb/image/upload/v1762797880/7f8152f5-d297-4760-aa6e-e79dfe981379.png"
                             alt="Map of Essex office"
                             width={1600}
                             height={900}
