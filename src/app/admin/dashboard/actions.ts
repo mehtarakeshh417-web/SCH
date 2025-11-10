@@ -40,7 +40,9 @@ const isVercel = !!process.env.VERCEL;
 const jobsFilePath = isVercel
   ? '/tmp/jobs.json'
   : path.join(process.cwd(), 'src', 'lib', 'jobs.json');
-const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
+const applicationsFilePath = isVercel
+  ? '/tmp/applications.json'
+  : path.join(process.cwd(), 'src', 'lib', 'applications.json');
 
 // Helper function to read a JSON file
 async function readJsonFile<T>(filePath: string): Promise<T[]> {
