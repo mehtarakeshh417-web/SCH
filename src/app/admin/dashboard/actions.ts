@@ -140,7 +140,9 @@ export async function submitApplication(formData: FormData): Promise<{ success: 
 
   try {
     // Handle file upload
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    const uploadsDir = isVercel
+      ? '/tmp/uploads'
+      : path.join(process.cwd(), 'public', 'uploads');
     await fs.mkdir(uploadsDir, { recursive: true });
     
     const fileExtension = path.extname(cvFile.name);
