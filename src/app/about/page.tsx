@@ -231,14 +231,14 @@ export default function AboutPage() {
                 <h2 className="font-headline text-3xl font-bold text-center">Our Location</h2>
                 <p className="text-muted-foreground text-center mt-4 mb-8">Visit us at our office in Essex.</p>
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border">
-                    <Link href="https://www.google.com/maps/search/?api=1&query=51.5072,-0.1276" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.google.com/maps/search/?api=1&query=51.75339,0.46237" target="_blank" rel="noopener noreferrer">
                         <Image
                             src="https://picsum.photos/seed/map/1600/900"
-                            alt="Map of London office"
+                            alt="Map of Essex office"
                             width={1600}
                             height={900}
                             className="w-full h-full object-cover cursor-pointer"
-                            data-ai-hint="map london"
+                            data-ai-hint="map essex"
                         />
                     </Link>
                 </div>
