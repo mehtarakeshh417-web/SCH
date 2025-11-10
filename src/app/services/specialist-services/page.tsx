@@ -44,7 +44,7 @@ export default function SpecialistServicesPage() {
 
         <div className="container py-16">
             <div className="max-w-4xl mx-auto text-center">
-                <h2 className="font-headline text-3xl font-bold">We’re getting ready to offer a range of specialist care services to support people with different needs. Soon, Symbolic Care Group will provide</h2>
+                <h2 className="font-headline text-3xl font-bold">We’re getting ready to offer a range of specialist care services to support people with different needs. Soon, Symbolic Care Group will provide:</h2>
             </div>
 
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
