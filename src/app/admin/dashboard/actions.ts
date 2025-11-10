@@ -125,7 +125,7 @@ export async function submitApplication(formData: FormData): Promise<{ success: 
   const cvFile = formData.get('cv') as File | null;
 
   if (!validatedFields.success) {
-    console.log(validatedFields.error.flatten().fieldErrors)
+    console.log('Validation error:', validatedFields.error.flatten().fieldErrors)
     return { success: false, message: "Invalid form data. Please check all fields." };
   }
   
@@ -148,12 +148,31 @@ export async function submitApplication(formData: FormData): Promise<{ success: 
     const cvPath = path.join(uploadsDir, uniqueFilename);
     const cvUrlPath = `/uploads/${uniqueFilename}`;
 
-    const bytes = await cvFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await fs.writeFile(cvPath, buffer);
+    let buffer;
+    try {
+      const bytes = await cvFile.arrayBuffer();
+      buffer = Buffer.from(bytes);
+    } catch (err) {
+      console.error('Error converting CV file to buffer:', err);
+      return { success: false, message: 'Failed to process CV file.' };
+    }
+
+    try {
+      await fs.writeFile(cvPath, buffer);
+    } catch (err) {
+      console.error('Error writing CV file to disk:', err, 'Path:', cvPath);
+      return { success: false, message: 'Failed to save CV file.' };
+    }
 
     // Save application data
-    const applications = await getApplications();
+    let applications;
+    try {
+      applications = await getApplications();
+    } catch (err) {
+      console.error('Error reading applications file:', err);
+      return { success: false, message: 'Failed to read applications data.' };
+    }
+
     const newApplication: Application = {
       id: new Date().toISOString() + Math.random().toString(36).substr(2, 9),
       ...validatedFields.data,
@@ -162,13 +181,18 @@ export async function submitApplication(formData: FormData): Promise<{ success: 
     };
     
     const updatedApplications = [newApplication, ...applications];
-    await writeJsonFile(applicationsFilePath, updatedApplications);
+    try {
+      await writeJsonFile(applicationsFilePath, updatedApplications);
+    } catch (err) {
+      console.error('Error writing applications file:', err, 'Path:', applicationsFilePath);
+      return { success: false, message: 'Failed to save application data.' };
+    }
     
     revalidatePath('/admin/dashboard');
 
     return { success: true, message: "Application submitted successfully!" };
   } catch (error) {
-    console.error("Application submission error:", error);
-    return { success: false, message: "An unexpected error occurred." };
+    console.error("Application submission unexpected error:", error);
+    return { success: false, message: `An unexpected error occurred: ${error instanceof Error ? error.message : String(error)}` };
   }
 }
