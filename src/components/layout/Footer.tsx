@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 ml-4">
             <Logo />
             <p className="mt-4 text-sm text-secondary-foreground/80">
               A reliable and ethical GP-led care provider in Essex.
