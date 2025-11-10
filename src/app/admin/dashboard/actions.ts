@@ -35,7 +35,11 @@ export type Application = {
 };
 
 
-const jobsFilePath = path.join(process.cwd(), 'src', 'lib', 'jobs.json');
+// Use /tmp/jobs.json on Vercel (serverless), fallback to src/lib/jobs.json locally
+const isVercel = !!process.env.VERCEL;
+const jobsFilePath = isVercel
+  ? '/tmp/jobs.json'
+  : path.join(process.cwd(), 'src', 'lib', 'jobs.json');
 const applicationsFilePath = path.join(process.cwd(), 'src', 'lib', 'applications.json');
 
 // Helper function to read a JSON file
@@ -53,7 +57,13 @@ async function readJsonFile<T>(filePath: string): Promise<T[]> {
 
 // Helper function to write to a JSON file
 async function writeJsonFile<T>(filePath: string, data: T[]): Promise<void> {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  try {
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  } catch (error: any) {
+    // Provide clearer error message for production logs (e.g. permission or readonly FS)
+    console.error(`Failed to write JSON file at ${filePath}:`, error);
+    throw new Error(`Failed to write JSON file at ${filePath}: ${error?.message ?? error}`);
+  }
 }
 
 // Job-related actions
@@ -68,7 +78,13 @@ export async function addJob(newJobData: Omit<Job, 'id'>): Promise<void> {
     ...newJobData,
   };
   const updatedJobs = [newJob, ...jobs];
-  await writeJsonFile(jobsFilePath, updatedJobs);
+  try {
+    await writeJsonFile(jobsFilePath, updatedJobs);
+  } catch (error: any) {
+    console.error('addJob error:', error);
+    // Re-throw so the server action surfaces a useful message for logs/clients
+    throw error instanceof Error ? error : new Error(String(error));
+  }
   revalidatePath('/careers');
   revalidatePath('/admin/dashboard');
 }
@@ -76,7 +92,12 @@ export async function addJob(newJobData: Omit<Job, 'id'>): Promise<void> {
 export async function deleteJob(id: string): Promise<void> {
   const jobs = await getJobs();
   const updatedJobs = jobs.filter((job) => job.id !== id);
-  await writeJsonFile(jobsFilePath, updatedJobs);
+  try {
+    await writeJsonFile(jobsFilePath, updatedJobs);
+  } catch (error: any) {
+    console.error('deleteJob error:', error);
+    throw error instanceof Error ? error : new Error(String(error));
+  }
   revalidatePath('/careers');
   revalidatePath('/admin/dashboard');
 }
