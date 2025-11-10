@@ -229,7 +229,7 @@ export default function AboutPage() {
 
              <section>
                 <h2 className="font-headline text-3xl font-bold text-center">Our Location</h2>
-                <p className="text-muted-foreground text-center mt-4 mb-8">Visit us at our office in London.</p>
+                <p className="text-muted-foreground text-center mt-4 mb-8">Visit us at our office in Essex.</p>
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border">
                     <Link href="https://www.google.com/maps/search/?api=1&query=51.5072,-0.1276" target="_blank" rel="noopener noreferrer">
                         <Image
