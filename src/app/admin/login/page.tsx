@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const adminPassword = '123456';
+  const adminPassword = 'Meetu@2025';
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
