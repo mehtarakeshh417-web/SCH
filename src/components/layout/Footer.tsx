@@ -64,8 +64,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border/20 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-secondary-foreground/80">
+        <div className="mt-8 ml-4 border-t border-border/20 pt-8 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm text-secondary-foreground/80 ml-4">
             &copy; {new Date().getFullYear()} Symbolic Care. All rights reserved.
           </p>
            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
