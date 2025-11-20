@@ -170,15 +170,15 @@ export default function AboutPage() {
                                 </ul>
                                 <CollapsibleContent className="mt-4 prose-p:mt-2">
                                    <h3 className="font-headline text-xl font-bold">Meet Our Registered Manager – Mrs. Meetu Madaan</h3>
-                                   <p>Mrs. Meetu Madaan is an experienced and respected leader with a deep understanding of the health and social care sector. With over 15 years of experience across care delivery, service management, and workforce development, she brings a strong blend of professional insight and compassionate leadership to Symbolic Care Group.
-Throughout her career, Mrs. Madaan has:
-•	Led and managed domiciliary care and education provision in Health and Social care 
-•	Delivered regulated health and social care training
-•	Managed government-funded workforce programmes
-•	Developed high-performing staff teams through structured training and supervision
-•	Ensured compliance with CQC, Ofsted, Matrix, and local authority quality frameworks
-Her strong sector expertise ensures that our services remain safe, person-centred, and fully aligned with national standards. Her leadership is rooted in quality, empowerment, and continuous improvement, driving our organisation to deliver exceptional care every day.
-At Symbolic Care Group, Mrs. Madaan’s insight and commitment shape the foundation of our values ensuring that individuals receive the respectful, reliable, and high-quality support they deserve.</p>
+                                   <p>Mrs. Meetu Madaan is an experienced and respected leader with a deep understanding of the health and social care sector. With over 15 years of experience across care delivery, service management, and workforce development, she brings a strong blend of professional insight and compassionate leadership to Symbolic Care Group.</p>
+<p>Throughout her career, Mrs. Madaan has:</p>
+<p>•	Led and managed domiciliary care and education provision in Health and Social care</p>
+<p>•	Delivered regulated health and social care training</p>
+<p>•	Managed government-funded workforce programmes</p>
+<p>•	Developed high-performing staff teams through structured training and supervision</p>
+<p>•	Ensured compliance with CQC, Ofsted, Matrix, and local authority quality frameworks</p>
+<p>Her strong sector expertise ensures that our services remain safe, person-centred, and fully aligned with national standards. Her leadership is rooted in quality, empowerment, and continuous improvement, driving our organisation to deliver exceptional care every day.</p>
+<p>At Symbolic Care Group, Mrs. Madaan’s insight and commitment shape the foundation of our values ensuring that individuals receive the respectful, reliable, and high-quality support they deserve.</p>
                                 </CollapsibleContent>
                             </CardContent>
                              <div className="p-6 pt-0 mt-auto">
