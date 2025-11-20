@@ -44,17 +44,15 @@ const whyChooseUs = [
 ];
 
 const drManpreetQualifications = [
-    "General Practitioner",
-    "MBBS, MRCGP, PgDip (Dermatology), MD (Anaesthesia)",
-    "Facilitator Trainer tier 2 - Oliver McGowan",
-    "Diploma in Leadership for health and social care and children and young people's services",
-    "Diploma (Advanced) in Challenging Behaviour"
+    "Director and Nominated Individual",
+    "Lead and facilitator trainer for Oliver MacGowan"
 ];
 
 const mrsMeetuQualifications = [
-    "Facilitator Trainer tier 2 - Oliver McGowan",
-    "Diploma in Leadership for health and social care and children and young people's services",
-    "Diploma (Advanced) in Challenging Behaviour"
+    "MA (English), BA (Humanities), B.Ed",
+    "Level 5 Diploma in Leadership for Health and Social Care and Children’s and Young People’s Services",
+    "Advanced Diploma in Challenging Behaviour",
+    "Lead and Facilitator Trainer – Oliver McGowan Mandatory Training (Tier 2)"
 ];
 
 
@@ -163,7 +161,7 @@ export default function AboutPage() {
                                     />
                                 )}
                                 <CardTitle className="text-center font-headline text-2xl">Mrs. Meetu Madaan</CardTitle>
-                                 <p className="text-center text-muted-foreground font-semibold">Registered Manager</p>
+                                 <p className="text-center text-muted-foreground font-semibold">Director & Registered Manager (CQC)</p>
                             </CardHeader>
                             <CardContent className="prose max-w-none text-muted-foreground flex-grow">
                                <h3 className="font-headline text-xl font-bold">Qualifications</h3>
@@ -171,8 +169,16 @@ export default function AboutPage() {
                                     {mrsMeetuQualifications.map((q, i) => <li key={i}>{q}</li>)}
                                 </ul>
                                 <CollapsibleContent className="mt-4 prose-p:mt-2">
-                                   <h3 className="font-headline text-xl font-bold">Experienced & Empowering Management</h3>
-                                   <p>Our Registered Manager, Mrs. Meetu Madaan, is a seasoned leader with a background in healthcare training and business development. Her experience in delivering regulated training across health and social care sectors ensures our team is well-equipped, highly trained, and continually improving. Her passion for quality care and empowerment lies at the heart of every decision we make.</p>
+                                   <h3 className="font-headline text-xl font-bold">Meet Our Registered Manager – Mrs. Meetu Madaan</h3>
+                                   <p>Mrs. Meetu Madaan is an experienced and respected leader with a deep understanding of the health and social care sector. With over 15 years of experience across care delivery, service management, and workforce development, she brings a strong blend of professional insight and compassionate leadership to Symbolic Care Group.
+Throughout her career, Mrs. Madaan has:
+•	Led and managed domiciliary care and education provision in Health and Social care 
+•	Delivered regulated health and social care training
+•	Managed government-funded workforce programmes
+•	Developed high-performing staff teams through structured training and supervision
+•	Ensured compliance with CQC, Ofsted, Matrix, and local authority quality frameworks
+Her strong sector expertise ensures that our services remain safe, person-centred, and fully aligned with national standards. Her leadership is rooted in quality, empowerment, and continuous improvement, driving our organisation to deliver exceptional care every day.
+At Symbolic Care Group, Mrs. Madaan’s insight and commitment shape the foundation of our values ensuring that individuals receive the respectful, reliable, and high-quality support they deserve.</p>
                                 </CollapsibleContent>
                             </CardContent>
                              <div className="p-6 pt-0 mt-auto">
