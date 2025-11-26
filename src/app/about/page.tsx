@@ -44,8 +44,10 @@ const whyChooseUs = [
 ];
 
 const drManpreetQualifications = [
-    "Director and Nominated Individual",
-    "Lead and facilitator trainer for Oliver MacGowan"
+    "MBBS MRCGP PgDip (Dermatology) MD (Anaesthesia)",
+    "Diploma leadership for health and social care and children and young people services"
+    "Lead and Facilitator Trainer – Oliver McGowan Mandatory Training (Tier 2)"
+    "Advanced Diploma in Challenging Behaviour"
 ];
 
 const mrsMeetuQualifications = [
@@ -125,7 +127,7 @@ export default function AboutPage() {
                                     />
                                 )}
                                 <CardTitle className="text-center font-headline text-2xl">Dr. Manpreet Singh</CardTitle>
-                                <p className="text-center text-muted-foreground font-semibold">Nominated Individual (CQC)</p>
+                                <p className="text-center text-muted-foreground font-semibold">Director & Nominated Individual (CQC)</p>
                             </CardHeader>
                             <CardContent className="prose max-w-none text-muted-foreground flex-grow">
                                 <h3 className="font-headline text-xl font-bold">Qualifications</h3>
@@ -134,7 +136,10 @@ export default function AboutPage() {
                                 </ul>
                                 <CollapsibleContent className="mt-4 prose-p:mt-2">
                                    <h3 className="font-headline text-xl font-bold">Leadership Rooted in Healthcare</h3>
-                                   <p>Our organisation is proudly led by Dr. Manpreet Singh, a practicing General Practitioner (GP) and our Nominated Individual under the Care Quality Commission (CQC). Dr. Singh brings clinical insight, safeguarding knowledge, and a proactive, person-centred approach to service governance — ensuring all care is safe, effective, and evidence-based.</p>
+                                   <p>Our organisation is proudly led by Dr. Manpreet Singh, a practicing General Practitioner (GP) and our Nominated Individual under the Care Quality Commission (CQC). Dr. Singh provides strong strategic leadership and regulatory oversight, supported by extensive frontline GP experience. His deep clinical understanding of long-term conditions, safeguarding, medication management, mental capacity, and risk assessment enables the service to deliver safe, proactive, and person-centred care. He works closely with multidisciplinary teams to ensure timely, coordinated responses to the changing needs of adults and young people.
+<br><br>As a Lead and Facilitator Trainer for Oliver McGowan Mandatory Training (Tier 2) approved  and accredited by NHS England , Dr. Singh brings advanced expertise in supporting people with learning disabilities and autistic people. His specialist knowledge strengthens staff training, promotes inclusive practice, and ensures compliance with national standards for neurodiversity and communication needs.
+<br><br>Dr. Singh’s GP background allows him to recognise early signs of deterioration, prevent avoidable hospital admissions, and design clinically informed, holistic care plans. His compassionate leadership helps the service maintain the highest standards of safety, professionalism, and evidence-based practice.
+</p>
                                 </CollapsibleContent>
                             </CardContent>
                              <div className="p-6 pt-0 mt-auto">
