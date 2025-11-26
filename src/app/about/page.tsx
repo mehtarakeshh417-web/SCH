@@ -45,8 +45,8 @@ const whyChooseUs = [
 
 const drManpreetQualifications = [
     "MBBS MRCGP PgDip (Dermatology) MD (Anaesthesia)",
-    "Diploma leadership for health and social care and children and young people services"
-    "Lead and Facilitator Trainer – Oliver McGowan Mandatory Training (Tier 2)"
+    "Diploma leadership for health and social care and children and young people services",
+    "Lead and Facilitator Trainer – Oliver McGowan Mandatory Training (Tier 2)",
     "Advanced Diploma in Challenging Behaviour"
 ];
 
