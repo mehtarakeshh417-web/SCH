@@ -3,12 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Logo } from "@/components/shared/Logo";
 import { navLinks } from "@/lib/data";
+import { Accreditations } from "@/components/home/Accreditations";
 
 export function Footer() {
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container py-12">
-  <div className="grid grid-cols-1 gap-8 md:grid-cols-4 ml-4">
+        {/* Accreditations section added to footer */}
+        <Accreditations />
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 ml-4">
           <div className="md:col-span-1 ml-4">
             <Logo />
             <p className="mt-4 text-sm text-secondary-foreground/80">
