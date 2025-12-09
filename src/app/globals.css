@@ -1,3 +1,7 @@
+#google_translate_element {
+  max-width: 100%;
+  overflow-x: auto;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
