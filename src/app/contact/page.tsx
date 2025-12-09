@@ -1,5 +1,5 @@
 
-import { ContactForm } from './ContactForm';
+// ...removed ContactForm import...
 import { Mail, Phone, MapPin, AlertTriangle, Smartphone } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { supportResources } from '@/lib/data';
@@ -64,7 +64,20 @@ export default function ContactPage() {
             </div>
           <div className="bg-card p-8 rounded-lg shadow-sm">
             <h2 className="text-2xl font-bold font-headline mb-6">Send us a Message</h2>
-            <ContactForm />
+                        {/* Embedded Google Form with same fields as previous contact form */}
+                        <div className="w-full">
+                            <iframe
+                                src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
+                                width="100%"
+                                height="700"
+                                frameBorder="0"
+                                marginHeight={0}
+                                marginWidth={0}
+                                title="Contact Google Form"
+                            >
+                                Loading…
+                            </iframe>
+                        </div>
           </div>
         </div>
 
