@@ -1,10 +1,10 @@
 #google_translate_element {
-  overflow-x: auto;
-  white-space: nowrap;
   max-width: 100%;
 }
-.goog-te-gadget {
+#google_translate_element .goog-te-gadget {
   display: inline-block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 @tailwind base;
 @tailwind components;
