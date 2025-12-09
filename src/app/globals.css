@@ -3,7 +3,9 @@
 }
 #google_translate_element .goog-te-gadget {
   display: inline-block;
+  max-width: 100%;
   overflow-x: auto;
+  overflow-y: auto;
   white-space: nowrap;
 }
 @tailwind base;
