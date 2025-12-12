@@ -67,7 +67,7 @@ export default function ContactPage() {
                         {/* Embedded Google Form with same fields as previous contact form */}
                         <div className="w-full">
                             <iframe
-                                src="https://docs.google.com/forms/d/e/1FAIpQLSdLQq7kbhh23Xs3GtOgn5wiXHlomig1R9057eZg7AGyJ1ojhg/viewform?embedded=true"
+                                src="https://form.jotform.com/253444816616057"
                                 width="100%"
                                 height="700"
                                 frameBorder="0"
