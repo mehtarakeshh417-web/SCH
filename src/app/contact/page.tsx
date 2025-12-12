@@ -17,8 +17,8 @@ export default function ContactPage() {
             We're here to help. Reach out to us with any questions or to schedule a consultation.
           </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 pl-4">
+            <div className="space-y-8 pl-8">
                 <div>
                     <h2 className="text-2xl font-bold font-headline">Get in Touch Directly</h2>
                     <p className="mt-2 text-muted-foreground">
